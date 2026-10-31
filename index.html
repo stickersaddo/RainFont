@@ -6,15 +6,15 @@
   <meta name="theme-color" content="#ffffff">
   <title>스티커사또 | 폰트 미리보기</title>
   <style>
-    /* 폰트 파일은 해당 파일명으로 fonts 폴더에 있을 때만 표시됩니다. */
-    @font-face { font-family: "Cute"; src: url("./fonts/RixCuteCatB.ttf") format("truetype"); font-display: swap; }
-    @font-face { font-family: "Straight"; src: url("./fonts/RixStraightB.ttf") format("truetype"); font-display: swap; }
-    @font-face { font-family: "Hello"; src: url("./fonts/RixHelloTwentyPM.ttf") format("truetype"); font-display: swap; }
-    @font-face { font-family: "Write"; src: url("./fonts/RixDictationPB.ttf") format("truetype"); font-display: swap; }
-    @font-face { font-family: "Modu"; src: url("./fonts/강원교육모두 Bold.ttf") format("truetype"); font-display: swap; }
-    @font-face { font-family: "Mongle"; src: url("./fonts/온글잎 몽몽데이즈몽글동심체.ttf") format("truetype"); font-display: swap; }
-    @font-face { font-family: "Long"; src: url("./fonts/온글잎 콘콘체.ttf") format("truetype"); font-display: swap; }
-    @font-face { font-family: "Lovely"; src: url("./fonts/온글잎 러블리현.ttf") format("truetype"); font-display: swap; }
+    /* 폰트 파일은 해당 파일명으로 font 폴더에 있을 때만 표시됩니다. */
+    @font-face { font-family: "Cute"; src: url("./font/RixCuteCatB.ttf") format("truetype"); font-display: swap; }
+    @font-face { font-family: "Straight"; src: url("./font/RixStraightB.ttf") format("truetype"); font-display: swap; }
+    @font-face { font-family: "Hello"; src: url("./font/RixHelloTwentyPM.ttf") format("truetype"); font-display: swap; }
+    @font-face { font-family: "Write"; src: url("./font/RixDictationPB.ttf") format("truetype"); font-display: swap; }
+    @font-face { font-family: "Modu"; src: url("./font/강원교육모두 Bold.ttf") format("truetype"); font-display: swap; }
+    @font-face { font-family: "Mongle"; src: url("./font/온글잎 몽몽데이즈몽글동심체.ttf") format("truetype"); font-display: swap; }
+    @font-face { font-family: "Long"; src: url("./font/온글잎 콘콘체.ttf") format("truetype"); font-display: swap; }
+    @font-face { font-family: "Lovely"; src: url("./font/온글잎 러블리현.ttf") format("truetype"); font-display: swap; }
     :root { color-scheme:light; --ink:#28282b; --muted:#8b8b91; --line:#e9e9ed; --accent:#d79b5a; --soft:#faf7f3; }
     * { box-sizing:border-box; }
     body { margin:0; padding:28px 16px; background:#f7f7f9; color:var(--ink); font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif; }
@@ -370,7 +370,7 @@ async function acceptFont(buffer,label){if(!window.opentype){throw new Error('�
   schedule();
 }
 async function loadHostedFont(){
-  const url='./fonts/온글잎 러블리현.ttf';
+  const url='./font/온글잎 러블리현.ttf';
   try {const resp=await fetch(url,{cache:'no-store'});if(!resp.ok)throw new Error('파일 없음');await acceptFont(await resp.arrayBuffer(),'GitHub 연결 러블리체');}
   catch(err){schedule();}
 }
