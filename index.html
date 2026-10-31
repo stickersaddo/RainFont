@@ -11,7 +11,7 @@
     @font-face { font-family: "Straight"; src: url("./font/RixStraightB.ttf") format("truetype"); font-display: swap; }
     @font-face { font-family: "Hello"; src: url("./font/RixHelloTwentyPM.ttf") format("truetype"); font-display: swap; }
     @font-face { font-family: "Write"; src: url("./font/RixDictationPB.ttf") format("truetype"); font-display: swap; }
-    @font-face { font-family: "Modu"; src: url("./font/강원교육모두 Bold.ttf") format("truetype"); font-display: swap; }
+    /* 강원모두체는 브라우저에서 원본 kern 테이블 오류가 나므로 아래 JS에서 메모리 내 정리 후 로드합니다. */
     @font-face { font-family: "Mongle"; src: url("./font/온글잎 몽몽데이즈몽글동심체.ttf") format("truetype"); font-display: swap; }
     @font-face { font-family: "Long"; src: url("./font/온글잎 콘콘체.ttf") format("truetype"); font-display: swap; }
     @font-face { font-family: "Lovely"; src: url("./font/온글잎 러블리현.ttf") format("truetype"); font-display: swap; }
@@ -379,6 +379,55 @@ if(location.protocol==='http:'||location.protocol==='https:'){
   window.addEventListener('load',loadHostedFont,{once:true});
 }else{window.addEventListener('load',schedule,{once:true});}
 schedule();
+})();
+</script>
+
+<script>
+/* 강원교육모두 Bold.ttf: Chrome OTS의 깨진 kern 테이블 오류를 브라우저 메모리에서만 우회합니다.
+   GitHub의 원본 폰트 파일은 변경하지 않습니다. */
+function removeBrokenKernTable(arrayBuffer) {
+  const bytes = new Uint8Array(arrayBuffer.slice(0));
+  const view = new DataView(bytes.buffer);
+  const tableCount = view.getUint16(4, false);
+  const directoryOffset = 12;
+  const directoryEnd = directoryOffset + tableCount * 16;
+  let kernOffset = -1;
+  for (let i = 0; i < tableCount; i++) {
+    const offset = directoryOffset + i * 16;
+    const tag = String.fromCharCode(bytes[offset], bytes[offset+1], bytes[offset+2], bytes[offset+3]);
+    if (tag === 'kern') { kernOffset = offset; break; }
+  }
+  if (kernOffset === -1) return bytes.buffer;
+  bytes.copyWithin(kernOffset, kernOffset + 16, directoryEnd);
+  bytes.fill(0, directoryEnd - 16, directoryEnd);
+  const nextCount = tableCount - 1;
+  const pow = Math.pow(2, Math.floor(Math.log2(nextCount)));
+  view.setUint16(4, nextCount, false);
+  view.setUint16(6, pow * 16, false);
+  view.setUint16(8, Math.log2(pow), false);
+  view.setUint16(10, nextCount * 16 - pow * 16, false);
+  return bytes.buffer;
+}
+
+(async function loadModuFont() {
+  const fontPath = './font/강원교육모두%20Bold.ttf';
+  try {
+    const response = await fetch(fontPath, {cache:'no-store'});
+    if (!response.ok) throw new Error('폰트 경로 응답: ' + response.status);
+    const fixedBuffer = removeBrokenKernTable(await response.arrayBuffer());
+    const fontUrl = URL.createObjectURL(new Blob([fixedBuffer], {type:'font/ttf'}));
+    const face = new FontFace('Modu', `url("${fontUrl}")`, {style:'normal',weight:'400'});
+    try {
+      await face.load();
+      document.fonts.add(face);
+      console.info('강원모두체 웹폰트 로드 완료');
+    } catch (fontError) {
+      URL.revokeObjectURL(fontUrl);
+      throw fontError;
+    }
+  } catch (error) {
+    console.warn('강원모두체를 읽지 못했습니다:', error);
+  }
 })();
 </script>
 </body>
