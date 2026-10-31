@@ -11,7 +11,7 @@
     @font-face { font-family: "Straight"; src: url("./font/RixStraightB.ttf") format("truetype"); font-display: swap; }
     @font-face { font-family: "Hello"; src: url("./font/RixHelloTwentyPM.ttf") format("truetype"); font-display: swap; }
     @font-face { font-family: "Write"; src: url("./font/RixDictationPB.ttf") format("truetype"); font-display: swap; }
-    @font-face { font-family: "Modu"; src: url("./font/강원교육모두 Bold.ttf") format("truetype"); font-display: swap; }
+    @font-face { font-family: "Modu"; src: url("./font/강원교육모두%20Bold.ttf") format("truetype"); font-display: swap; }
     @font-face { font-family: "Mongle"; src: url("./font/온글잎 몽몽데이즈몽글동심체.ttf") format("truetype"); font-display: swap; }
     @font-face { font-family: "Long"; src: url("./font/온글잎 콘콘체.ttf") format("truetype"); font-display: swap; }
     @font-face { font-family: "Lovely"; src: url("./font/온글잎 러블리현.ttf") format("truetype"); font-display: swap; }
@@ -85,7 +85,7 @@
   </section>
   <section class="field">
     <label for="nameInput">이름을 입력해 주세요 ✏️</label>
-    <input id="nameInput" type="text" value="조예주" maxlength="40" autocomplete="off" spellcheck="false">
+    <input id="nameInput" type="text" value="김사또" maxlength="40" autocomplete="off" spellcheck="false">
     <p class="hint">입력하신 이름이 모든 글씨체에 자동으로 적용됩니다.</p>
   </section>
   <section aria-label="글씨체 미리보기">
@@ -93,31 +93,31 @@
     <div class="font-grid">
       <button class="font-card" type="button" data-font="cute" data-label="귀염체" aria-pressed="false">
         <span class="card-top"><span class="card-label">귀염체</span><span class="check" aria-hidden="true">✓</span></span>
-        <span class="font-preview cute">조예주</span><span class="card-footer">미리보기</span>
+        <span class="font-preview cute">김사또</span><span class="card-footer">미리보기</span>
       </button>
       <button class="font-card" type="button" data-font="straight" data-label="반듯체" aria-pressed="false">
         <span class="card-top"><span class="card-label">반듯체</span><span class="check" aria-hidden="true">✓</span></span>
-        <span class="font-preview straight">조예주</span><span class="card-footer">미리보기</span>
+        <span class="font-preview straight">김사또</span><span class="card-footer">미리보기</span>
       </button>
       <button class="font-card" type="button" data-font="hello" data-label="안녕체" aria-pressed="false">
         <span class="card-top"><span class="card-label">안녕체</span><span class="check" aria-hidden="true">✓</span></span>
-        <span class="font-preview hello">조예주</span><span class="card-footer">미리보기</span>
+        <span class="font-preview hello">김사또</span><span class="card-footer">미리보기</span>
       </button>
       <button class="font-card" type="button" data-font="write" data-label="쓰기체" aria-pressed="false">
         <span class="card-top"><span class="card-label">쓰기체</span><span class="check" aria-hidden="true">✓</span></span>
-        <span class="font-preview write">조예주</span><span class="card-footer">미리보기</span>
+        <span class="font-preview write">김사또</span><span class="card-footer">미리보기</span>
       </button>
       <button class="font-card" type="button" data-font="modu" data-label="모두체" aria-pressed="false">
         <span class="card-top"><span class="card-label">모두체</span><span class="check" aria-hidden="true">✓</span></span>
-        <span class="font-preview modu">조예주</span><span class="card-footer">미리보기</span>
+        <span class="font-preview modu">김사또</span><span class="card-footer">미리보기</span>
       </button>
       <button class="font-card" type="button" data-font="mongle" data-label="몽글체" aria-pressed="false">
         <span class="card-top"><span class="card-label">몽글체</span><span class="check" aria-hidden="true">✓</span></span>
-        <span class="font-preview mongle">조예주</span><span class="card-footer">미리보기</span>
+        <span class="font-preview mongle">김사또</span><span class="card-footer">미리보기</span>
       </button>
       <button class="font-card" type="button" data-font="long" data-label="길쭉체" aria-pressed="false">
         <span class="card-top"><span class="card-label">길쭉체</span><span class="check" aria-hidden="true">✓</span></span>
-        <span class="font-preview long">조예주</span><span class="card-footer">미리보기</span>
+        <span class="font-preview long">김사또</span><span class="card-footer">미리보기</span>
       </button>
       <button class="font-card" type="button" data-font="lovely" data-label="무지개상품" aria-pressed="true">
         <span class="card-top"><span class="card-label">무지개상품</span><span class="check" aria-hidden="true">✓</span></span>
@@ -355,7 +355,7 @@ function schedule(){cancelAnimationFrame(state.raf);state.raf=requestAnimationFr
 function selectCard(card){state.selected=card.dataset.font;for(const c of cards){const active=c===card;c.setAttribute('aria-pressed',String(active));c.querySelector('.card-footer').textContent=active?'선택됨':'미리보기';}schedule();}
 for(const c of cards)c.addEventListener('click',()=>selectCard(c));
 input.addEventListener('input',schedule);
-document.getElementById('resetButton').addEventListener('click',()=>{input.value='조예주';selectCard(cards.find(c=>c.dataset.font==='lovely'));input.focus();});
+document.getElementById('resetButton').addEventListener('click',()=>{input.value='김사또';selectCard(cards.find(c=>c.dataset.font==='lovely'));input.focus();});
 async function acceptFont(buffer,label){if(!window.opentype){throw new Error('폰트 분석 라이브러리를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.');}
   const parsed=window.opentype.parse(buffer);
   if(!parsed||!parsed.charToGlyph)throw new Error('폰트 파일을 읽을 수 없습니다.');
