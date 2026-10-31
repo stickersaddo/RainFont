@@ -55,7 +55,7 @@
     .lovely { font-family:"Lovely","Malgun Gothic",sans-serif; letter-spacing:normal; font-kerning:normal; }
     .lovely-view { display:flex; align-items:center; justify-content:center; width:100%; height:49px; overflow:hidden; }
     .lovely-view svg { max-width:100%; width:100%; height:100%; display:block; }
-    .chosen { margin-top:22px; padding:19px 16px 23px; border-radius:13px; background:var(--soft); text-align:center; }
+    .chosen { margin:0 0 14px; padding:19px 16px 23px; border-radius:13px; background:var(--soft); text-align:center; }
     .chosen p { margin:0 0 13px; color:#858083; font-size:12px; }
     .chosen-name { display:flex; align-items:center; justify-content:center; min-height:48px; font-size:34px; line-height:1.4; overflow-wrap:anywhere; }
     .chosen-name .lovely-view { height:73px; }
@@ -90,6 +90,10 @@
   </section>
   <section aria-label="글씨체 미리보기">
     <div class="section-title"><strong>글씨체 미리보기</strong><small>총 8종</small></div>
+  <section class="chosen" aria-live="polite">
+    <p id="chosenLabel">내가 선택한 글씨체 · 무지개상품</p>
+    <div id="chosenName" class="chosen-name"></div>
+  </section>
     <div class="font-grid">
       <button class="font-card" type="button" data-font="cute" data-label="귀염체" aria-pressed="false">
         <span class="card-top"><span class="card-label">귀염체</span><span class="check" aria-hidden="true">✓</span></span>
@@ -124,10 +128,6 @@
         <span class="font-preview lovely-view" id="lovelySmall"></span><span class="card-footer">선택됨</span>
       </button>
     </div>
-  </section>
-  <section class="chosen" aria-live="polite">
-    <p id="chosenLabel">내가 선택한 글씨체 · 무지개상품</p>
-    <div id="chosenName" class="chosen-name"></div>
   </section>
   <button id="resetButton" class="reset" type="button">↻ 처음부터 다시 보기</button>
   <footer>© STICKER SADDO · Font Preview</footer>
