@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>스티커사또 | 폰트 미리보기</title>
+  <style>
+    /* 폰트 파일은 해당 파일명으로 fonts 폴더에 있을 때만 표시됩니다. */
+    @font-face { font-family: "Cute"; src: url("./fonts/RixCuteCatB.ttf") format("truetype"); font-display: swap; }
+    @font-face { font-family: "Straight"; src: url("./fonts/RixStraightB.ttf") format("truetype"); font-display: swap; }
+    @font-face { font-family: "Hello"; src: url("./fonts/RixHelloTwentyPM.ttf") format("truetype"); font-display: swap; }
+    @font-face { font-family: "Write"; src: url("./fonts/RixDictationPB.ttf") format("truetype"); font-display: swap; }
+    @font-face { font-family: "Modu"; src: url("./fonts/GangwonEduAllBold.ttf") format("truetype"); font-display: swap; }
+    @font-face { font-family: "Mongle"; src: url("./fonts/Ownglyph_mongmongdays-Rg.ttf") format("truetype"); font-display: swap; }
+    @font-face { font-family: "Long"; src: url("./fonts/Ownglyph_corncorn-Rg.ttf") format("truetype"); font-display: swap; }
+    @font-face { font-family: "Lovely"; src: url("./fonts/Ownglyph_lovelyhyun-Rg.ttf") format("truetype"); font-display: swap; }
+    :root { color-scheme:light; --ink:#28282b; --muted:#8b8b91; --line:#e9e9ed; --accent:#d79b5a; --soft:#faf7f3; }
+    * { box-sizing:border-box; }
+    body { margin:0; padding:28px 16px; background:#f7f7f9; color:var(--ink); font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif; }
+    .page { max-width:560px; margin:0 auto; padding:28px 22px 22px; border:1px solid var(--line); border-radius:23px; background:#fff; box-shadow:0 8px 30px rgba(25,25,30,.035); }
+    header,.intro { text-align:center; }
+    .brand { font-size:28px; font-weight:800; letter-spacing:-.9px; }
+    .brand span { color:#e2a8a6; }
+    .sub { margin:5px 0 0; color:var(--muted); font-size:10px; letter-spacing:1.5px; }
+    .divider { height:1px; margin:24px 0; background:var(--line); }
+    .intro h1 { margin:0 0 9px; font-size:19px; letter-spacing:-.8px; }
+    .intro p { margin:0; color:var(--muted); font-size:12px; line-height:1.6; }
+    .field { margin:27px 0 23px; }
+    .field label { display:block; margin-bottom:10px; font-size:14px; font-weight:700; }
+    .field input { display:block; width:100%; height:48px; padding:0 14px; border:1px solid #dedee4; border-radius:10px; background:#fff; color:var(--ink); font:inherit; font-size:16px; outline:none; transition:border-color .2s, box-shadow .2s; }
+    .field input:focus { border-color:var(--accent); box-shadow:0 0 0 3px #d79b5a23; }
+    .hint { margin:8px 0 0; color:var(--muted); font-size:11px; }
+    .section-title { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+    .section-title strong { font-size:15px; }
+    .section-title small { color:var(--muted); font-size:12px; }
+    .font-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; }
+    .font-card { display:flex; flex-direction:column; align-items:center; gap:11px; min-height:130px; padding:13px 9px 11px; border:1px solid var(--line); border-radius:13px; color:inherit; background:#fff; cursor:pointer; transition:border-color .15s,background .15s; }
+    .font-card[aria-pressed="true"] { border:2px solid var(--accent); padding:12px 8px 10px; background:#fffdfb; }
+    .font-card:focus-visible { outline:3px solid #d79b5a66; outline-offset:3px; }
+    .card-top { width:100%; display:flex; justify-content:space-between; align-items:center; }
+    .card-label { color:#77777e; font:12px system-ui,sans-serif; }
+    .check { color:#c59253; font-size:16px; opacity:0; }
+    .font-card[aria-pressed="true"] .check { opacity:1; }
+    .font-preview { width:100%; text-align:center; font-size:clamp(17px,3.6vw,26px); line-height:1.35; overflow-wrap:anywhere; }
+    .card-footer { margin-top:auto; color:var(--muted); font:11px system-ui,sans-serif; }
+    .font-card[aria-pressed="true"] .card-footer { color:#b47f3e; }
+    .cute { font-family:"Cute",sans-serif; }
+    .straight { font-family:"Straight",sans-serif; }
+    .hello { font-family:"Hello",sans-serif; }
+    .write { font-family:"Write",sans-serif; }
+    .modu { font-family:"Modu",sans-serif; }
+    .mongle { font-family:"Mongle",sans-serif; }
+    .long { font-family:"Long",sans-serif; }
+    .lovely { font-family:"Lovely","Malgun Gothic",sans-serif; letter-spacing:normal; font-kerning:normal; }
+    .lovely-view { display:flex; align-items:center; justify-content:center; width:100%; height:49px; overflow:hidden; }
+    .lovely-view svg { max-width:100%; width:100%; height:100%; display:block; }
+    .chosen { margin-top:22px; padding:19px 16px 23px; border-radius:13px; background:var(--soft); text-align:center; }
+    .chosen p { margin:0 0 13px; color:#858083; font-size:12px; }
+    .chosen-name { display:flex; align-items:center; justify-content:center; min-height:48px; font-size:34px; line-height:1.4; overflow-wrap:anywhere; }
+    .chosen-name .lovely-view { height:73px; }
+    .reset { display:block; width:100%; margin-top:17px; padding:12px; border:1px solid var(--line); border-radius:10px; background:#fff; color:#505056; font:600 13px system-ui,sans-serif; cursor:pointer; }
+    .reset:hover { background:#fafafa; }
+    /* 색상을 배경 그라데이션으로 채우지 않습니다. */
+    .color-demo { display:inline-flex; justify-content:center; flex-wrap:wrap; align-items:center; gap:2px; }
+    .color-demo > span { display:inline-block; -webkit-text-fill-color:initial; }
+    .view-hint { font-size:10px; color:#a19a94; text-align:center; margin:5px 0 0; }
+    .lovely-view svg text { font-family:"Lovely", "NanumBarunGothic", "Noto Sans KR", "Malgun Gothic", sans-serif; font-weight:700; paint-order:stroke; letter-spacing:normal; }
+    footer { margin-top:18px; text-align:center; color:#aaaab0; font-size:10px; }
+    @media(max-width:380px) { .page{padding:24px 15px 19px}.brand{font-size:25px}.intro h1{font-size:17px}.font-preview{font-size:17px}.font-card{padding-left:6px;padding-right:6px}.font-card[aria-pressed="true"]{padding-left:5px;padding-right:5px}.font-grid{gap:6px}.card-label{font-size:11px} }
+  </style>
+  <!-- 외부 라이브러리는 실제 러블리체 폰트 윤곽선 분석을 할 때만 필요합니다. 데모는 오프라인에서도 작동합니다. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/opentype.js/1.3.4/opentype.min.js" async></script>
+</head>
+<body>
+<main class="page">
+  <header>
+    <div class="brand">스티커사또 <span>♡</span></div>
+    <p class="sub">STICKER SADDO · FONT PREVIEW</p>
+  </header>
+  <div class="divider"></div>
+  <section class="intro">
+    <h1>내 이름은 어떤 글씨체가 예쁠까?</h1>
+    <p>원하는 이름을 입력하고 나만의 글씨체를 찾아보세요 ♡</p>
+  </section>
+  <section class="field">
+    <label for="nameInput">이름을 입력해 주세요 ✏️</label>
+    <input id="nameInput" type="text" value="조예주" maxlength="40" autocomplete="off" spellcheck="false">
+    <p class="hint">입력하신 이름이 모든 글씨체에 자동으로 적용됩니다.</p>
+  </section>
+  <section aria-label="글씨체 미리보기">
+    <div class="section-title"><strong>글씨체 미리보기</strong><small>총 8종</small></div>
+    <div class="font-grid">
+      <button class="font-card" type="button" data-font="cute" data-label="귀염체" aria-pressed="false">
+        <span class="card-top"><span class="card-label">귀염체</span><span class="check" aria-hidden="true">✓</span></span>
+        <span class="font-preview cute">조예주</span><span class="card-footer">미리보기</span>
+      </button>
+      <button class="font-card" type="button" data-font="straight" data-label="반듯체" aria-pressed="false">
+        <span class="card-top"><span class="card-label">반듯체</span><span class="check" aria-hidden="true">✓</span></span>
+        <span class="font-preview straight">조예주</span><span class="card-footer">미리보기</span>
+      </button>
+      <button class="font-card" type="button" data-font="hello" data-label="안녕체" aria-pressed="false">
+        <span class="card-top"><span class="card-label">안녕체</span><span class="check" aria-hidden="true">✓</span></span>
+        <span class="font-preview hello">조예주</span><span class="card-footer">미리보기</span>
+      </button>
+      <button class="font-card" type="button" data-font="write" data-label="쓰기체" aria-pressed="false">
+        <span class="card-top"><span class="card-label">쓰기체</span><span class="check" aria-hidden="true">✓</span></span>
+        <span class="font-preview write">조예주</span><span class="card-footer">미리보기</span>
+      </button>
+      <button class="font-card" type="button" data-font="modu" data-label="모두체" aria-pressed="false">
+        <span class="card-top"><span class="card-label">모두체</span><span class="check" aria-hidden="true">✓</span></span>
+        <span class="font-preview modu">조예주</span><span class="card-footer">미리보기</span>
+      </button>
+      <button class="font-card" type="button" data-font="mongle" data-label="몽글체" aria-pressed="false">
+        <span class="card-top"><span class="card-label">몽글체</span><span class="check" aria-hidden="true">✓</span></span>
+        <span class="font-preview mongle">조예주</span><span class="card-footer">미리보기</span>
+      </button>
+      <button class="font-card" type="button" data-font="long" data-label="길쭉체" aria-pressed="false">
+        <span class="card-top"><span class="card-label">길쭉체</span><span class="check" aria-hidden="true">✓</span></span>
+        <span class="font-preview long">조예주</span><span class="card-footer">미리보기</span>
+      </button>
+      <button class="font-card" type="button" data-font="lovely" data-label="무지개상품" aria-pressed="true">
+        <span class="card-top"><span class="card-label">무지개상품</span><span class="check" aria-hidden="true">✓</span></span>
+        <span class="font-preview lovely-view" id="lovelySmall"></span><span class="card-footer">선택됨</span>
+      </button>
+    </div>
+  </section>
+  <section class="chosen" aria-live="polite">
+    <p id="chosenLabel">내가 선택한 글씨체 · 무지개상품</p>
+    <div id="chosenName" class="chosen-name"></div>
+  </section>
+  <button id="resetButton" class="reset" type="button">↻ 처음부터 다시 보기</button>
+  <footer>© STICKER SADDO · Font Preview</footer>
+</main>
+<script>
+(() => {
+'use strict';
+/* Illustrator URColorEngine의 색상 값과 충돌·6회 순환 규칙을 웹용으로 포팅. */
+const PALETTE_CMYK = {
+  '빨':[0,100,90,0], '주':[0,80,100,0], '노':[0,5,100,0], '초':[80,0,100,0],
+  '파':[100,45,0,0], '남':[100,90,0,10], '보':[55,100,0,0],
+  '연두':[45,0,100,0], '분홍':[0,85,20,0], '주황':[0,55,100,0]
+};
+const JAMO_BASE = {
+  'ㄱ':'빨','ㄲ':'빨','ㄳ':'빨','ㄴ':'주','ㄵ':'주','ㄶ':'주','ㄷ':'노','ㄸ':'노',
+  'ㄹ':'초','ㄺ':'초','ㄻ':'초','ㄼ':'초','ㄽ':'초','ㄾ':'초','ㄿ':'초','ㅀ':'초',
+  'ㅁ':'파','ㅂ':'남','ㅃ':'남','ㅄ':'남','ㅅ':'보','ㅆ':'보','ㅇ':'분홍','ㅈ':'연두',
+  'ㅉ':'연두','ㅊ':'주황','ㅋ':'빨','ㅌ':'주','ㅍ':'노','ㅎ':'초',
+  'ㅏ':'빨','ㅑ':'주','ㅓ':'노','ㅕ':'초','ㅗ':'파','ㅛ':'남','ㅜ':'보','ㅠ':'분홍','ㅡ':'연두','ㅣ':'주황',
+  'ㅐ':'빨','ㅒ':'주','ㅔ':'노','ㅖ':'초','ㅘ':'파','ㅙ':'남','ㅚ':'보','ㅝ':'분홍','ㅞ':'연두','ㅟ':'주황','ㅢ':'빨'
+};
+const LATIN_COLORS=['빨','주','노','초','파','남','보','연두','분홍','주황'];
+'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach((ch,i)=>JAMO_BASE[ch]=LATIN_COLORS[i%10]);
+'abcdefghijklmnopqrstuvwxyz'.split('').forEach((ch,i)=>JAMO_BASE[ch]=LATIN_COLORS[i%10]);
+'0123456789'.split('').forEach((ch,i)=>JAMO_BASE[ch]=LATIN_COLORS[i]);
+const OPPOSITE={'빨':'남','남':'빨','주':'보','보':'주','노':'분홍','분홍':'노','초':'연두','연두':'초','파':'주황','주황':'파'};
+const DEFAULT_ORDER=['빨','주','노','초','파','남','보','분홍','연두','주황'];
+const STAGE_ORDER={
+  2:['남','보','분홍','연두','주황','빨','주','노','초','파'],
+  3:['분홍','연두','주황','빨','주','노','초','파','남','보'],
+  4:['보','남','파','초','노','주','빨','주황','연두','분홍'],
+  5:['주황','빨','연두','주','분홍','노','보','초','남','파']
+};
+const CHO=['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+const JUNG=['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
+const JONG=['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+const COMPOUND={'ㅘ':['ㅗ','ㅏ'],'ㅙ':['ㅗ','ㅐ'],'ㅚ':['ㅗ','ㅣ'],'ㅝ':['ㅜ','ㅓ'],'ㅞ':['ㅜ','ㅔ'],'ㅟ':['ㅜ','ㅣ'],'ㅢ':['ㅡ','ㅣ']};
+const state={ font:null, selected:'lovely', raf:0, warnedApprox:false };
+const input=document.getElementById('nameInput');
+const cards=Array.from(document.querySelectorAll('.font-card'));
+const chosen=document.getElementById('chosenName');
+const chosenLabel=document.getElementById('chosenLabel');
+const lovelySmall=document.getElementById('lovelySmall');
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// 기존 JSX에 지정된 CMYK 팔레트를 범용 CMYK ICC 프로파일로 sRGB 변환한 화면용 근삿값.
+// Adobe Illustrator의 CMYK 작업 프로파일이 다르면 보이는 RGB도 달라집니다.
+const PALETTE_SRGB = {"빨":"#ee333f","주":"#f16237","노":"#ffe71d","초":"#2bb455","파":"#007dc2","남":"#344690","보":"#8d3a93","연두":"#9dcc49","분홍":"#ef5688","주황":"#f78f34"};
+function colorFor(name){return PALETTE_SRGB[name] || '#000000';}
+function colorCursor(){
+  const counts=Object.create(null),used=[];
+  return function next(jamo){
+    const base=JAMO_BASE[jamo]; if(!base) return '#000000';
+    const stage=(counts[jamo]||0)%6; counts[jamo]=(counts[jamo]||0)+1;
+    let candidate=stage===0?base:stage===1?OPPOSITE[base]:null;
+    const order=stage>=2?STAGE_ORDER[stage]:DEFAULT_ORDER;
+    if(stage>=2){candidate=order.find(x=>!used.includes(x));if(!candidate){used.length=0;candidate=order[0];}}
+    if(used.includes(candidate)){
+      const replacement=order.find(x=>!used.includes(x));
+      if(replacement)candidate=replacement;else{used.length=0;candidate=order[0];}
+    }
+    used.push(candidate);return colorFor(candidate);
+  };
+}
+function decompose(c){const n=c.codePointAt(0);if(n>=0xac00&&n<=0xd7a3){const k=n-0xac00;return {type:'hangul',character:c,cho:CHO[Math.floor(k/588)],jung:JUNG[Math.floor(k%588/28)],jong:JONG[k%28]};}
+  if(JAMO_BASE[c])return {type:'jamo',character:c};
+  if(/^[A-Za-z0-9]$/.test(c))return {type:'latin',character:c};
+  if(c==='.'||c==='-'||c==='<')return {type:'black',character:c};
+  if(c===' '||c==='\t')return {type:'space',character:c};
+  return {type:'unsupported',character:c};
+}
+function toD(commands){const f=n=>Number(n.toFixed(3));return commands.map(cmd=>{
+  if(cmd.type==='M'||cmd.type==='L')return cmd.type+f(cmd.x)+' '+f(cmd.y);
+  if(cmd.type==='Q')return 'Q'+f(cmd.x1)+' '+f(cmd.y1)+' '+f(cmd.x)+' '+f(cmd.y);
+  if(cmd.type==='C')return 'C'+f(cmd.x1)+' '+f(cmd.y1)+' '+f(cmd.x2)+' '+f(cmd.y2)+' '+f(cmd.x)+' '+f(cmd.y);
+  if(cmd.type==='Z')return 'Z';return '';
+}).join(' ');}
+function getContours(commands){const contours=[];let current=[];
+  const flush=()=>{if(current.length){if(current[current.length-1].type!=='Z')current.push({type:'Z'});contours.push(current);current=[];}};
+  for(const command of commands){if(command.type==='M'){flush();current.push(command);}else if(command.type==='Z'){current.push(command);flush();}else if(current.length)current.push(command);}
+  flush();
+  return contours.map(cmds=>{
+    const xy=[]; for(const c of cmds){for(const p of ['','1','2'])if(typeof c['x'+p]==='number'&&typeof c['y'+p]==='number')xy.push([c['x'+p],c['y'+p]]);}
+    if(!xy.length)return null;
+    return {commands:cmds, d:toD(cmds), b:{l:Math.min(...xy.map(x=>x[0])),r:Math.max(...xy.map(x=>x[0])),t:Math.min(...xy.map(x=>x[1])),bt:Math.max(...xy.map(x=>x[1]))}};
+  }).filter(Boolean);
+}
+function area(b){return Math.max(0,b.r-b.l)*Math.max(0,b.bt-b.t);}
+function inside(a,b){const m=.1;return a.l>b.l+m&&a.r<b.r-m&&a.t>b.t+m&&a.bt<b.bt-m;}
+function componentsFromContours(contours){const owners=contours.map((c,i)=>{
+  let best=-1,bestArea=Infinity;for(let j=0;j<contours.length;j++)if(i!==j&&inside(c.b,contours[j].b)){const a=area(contours[j].b);if(a<bestArea){best=j;bestArea=a;}}return best;
+});
+  const result=[];for(let i=0;i<contours.length;i++)if(owners[i]===-1){result.push({outer:contours[i],inners:[]});}
+  for(let i=0;i<contours.length;i++)if(owners[i]!==-1){let parent=owners[i];while(owners[parent]!==-1)parent=owners[parent];const target=result.find(g=>g.outer===contours[parent]);if(target)target.inners.push(contours[i]);}
+  return result;
+}
+function cbounds(cs){let l=Infinity,t=Infinity,r=-Infinity,bt=-Infinity;for(const c of cs){const b=c.outer.b;l=Math.min(l,b.l);r=Math.max(r,b.r);t=Math.min(t,b.t);bt=Math.max(bt,b.bt);}return{l,t,r,bt};}
+function cx(c){return(c.outer.b.l+c.outer.b.r)/2;}
+function cy(c){return(c.outer.b.t+c.outer.b.bt)/2;}
+function vowelLayout(v){return 'ㅏㅐㅑㅒㅓㅔㅕㅖㅣ'.includes(v)?'vertical':'ㅗㅛㅜㅠㅡ'.includes(v)?'horizontal':'mixed';}
+function anchors(v,final){const l=vowelLayout(v);
+  if(l==='vertical')return final?[[.27,.32],[.73,.34],[.50,.84]]:[[.27,.50],[.73,.50]];
+  if(l==='horizontal')return final?[[.50,.19],[.50,.55],[.50,.86]]:[[.50,.25],[.50,.72]];
+  return final?[[.25,.30],[.68,.43],[.50,.85]]:[[.27,.42],[.68,.52]];
+}
+function assignComponents(cs,v,hasFinal){const b=cbounds(cs),w=Math.max(1,b.r-b.l),h=Math.max(1,b.bt-b.t),anchor=anchors(v,hasFinal),layout=vowelLayout(v),groups=anchor.map(()=>[]);
+  for(const c of cs){const x=(cx(c)-b.l)/w,y=(cy(c)-b.t)/h;let best=0,min=Infinity;
+    anchor.forEach((p,i)=>{const dx=x-p[0],dy=y-p[1];const d=layout==='vertical'?dx*dx*1.7+dy*dy:layout==='horizontal'?dx*dx+dy*dy*1.7:dx*dx+dy*dy;if(d<min){min=d;best=i;}});groups[best].push(c);}
+  return groups;
+}
+function assignHieutHorizontal(cs,final){const b=cbounds(cs),h=Math.max(1,b.bt-b.t),groups=final?[[],[],[]]:[[],[]];
+  for(const c of cs){const y=(cy(c)-b.t)/h;if(final)groups[y<.43?0:y<.73?1:2].push(c);else groups[y<.55?0:1].push(c);}return groups;
+}
+function assignHieutCompound(cs,final){const b=cbounds(cs),w=Math.max(1,b.r-b.l),h=Math.max(1,b.bt-b.t),groups=final?[[],[],[]]:[[],[]];
+  for(const c of cs){const x=(cx(c)-b.l)/w,y=(cy(c)-b.t)/h;groups[final&&y>=.72?2:(x<.48&&y<(final?.45:.52))?0:1].push(c);}return groups;
+}
+function assignCompound(cs,final){const b=cbounds(cs),w=Math.max(1,b.r-b.l),h=Math.max(1,b.bt-b.t),groups=final?[[],[],[]]:[[],[]];
+  for(const c of cs){const x=(cx(c)-b.l)/w,y=(cy(c)-b.t)/h;groups[final&&y>=.72?2:(x>=.42||y>=.32)?1:0].push(c);}return groups;
+}
+function splitVowel(cs){const b=cbounds(cs),w=Math.max(1,b.r-b.l),groups=[[],[]];for(const c of cs)groups[(cx(c)-b.l)/w>=.56?1:0].push(c);return groups;}
+function pathOfComponent(c){return [c.outer,...c.inners].map(x=>x.d).join(' ');}
+function coloredPath(cs,color){return cs.map(c=>`<path d="${pathOfComponent(c)}" fill="${color}" fill-rule="evenodd" stroke="${color}" stroke-width="0.24" stroke-linejoin="round"/>`).join('');}
+/*
+ * 글자 윤곽을 분리할 수 없거나 폰트 미첨부 상태에서도 보이는 샘플.
+ * 완성형 글자의 자모를 각각 독립적인 텍스트 요소로 조립합니다.
+ * 어떤 상황에서도 그라데이션/글리프 전체 영역별 색띠를 사용하지 않습니다.
+ * 이 모드는 자모별 색 분리 검증용이며 실제 러블리체 형태와 다를 수 있습니다.
+ */
+function flatJamoText(jamo,x,y,size,color){
+  return `<text x="${x}" y="${y}" font-size="${size}" text-anchor="middle" dominant-baseline="middle" fill="${color}">${esc(jamo)}</text>`;
+}
+function drawComposedJamo(info,baseX,next){
+  // 러블리체 파일이 없을 때만 임시로 표시하는 자모 색상 테스트.
+  // 정확한 글자 간격은 원본 폰트 로딩 후 glyph advanceWidth/kerning을 사용합니다.
+  // 기존 colorCursor()/PALETTE_CMYK/PALETTE_SRGB 규칙은 변경하지 않습니다.
+  const x=baseX, cho=next(info.cho), jung=next(info.jung), jong=info.jong?next(info.jong):null;
+  const layout=vowelLayout(info.jung);
+  let bits='';
+  if(layout==='vertical'){
+    bits+=flatJamoText(info.cho,x+34,59,info.jong?63:75,cho);
+    bits+=flatJamoText(info.jung,x+73,59,info.jong?59:74,jung);
+  }else if(layout==='horizontal'){
+    bits+=flatJamoText(info.cho,x+53,info.jong?38:43,info.jong?57:64,cho);
+    bits+=flatJamoText(info.jung,x+53,info.jong?76:86,info.jong?52:61,jung);
+  }else{
+    bits+=flatJamoText(info.cho,x+33,info.jong?38:47,info.jong?51:62,cho);
+    bits+=flatJamoText(info.jung,x+69,info.jong?55:66,info.jong?54:63,jung);
+  }
+  if(info.jong) bits+=flatJamoText(info.jong,x+53,107,53,jong);
+  return bits;
+}
+function demoSvgForText(text,view){
+  const next=colorCursor();let out='',x=10;
+  for(const ch of Array.from(text)){
+    const info=decompose(ch);
+    if(info.type==='space'){x+=33;continue;}
+    if(info.type==='hangul'){
+      out+=drawComposedJamo(info,x,next);
+      x+=106;
+    }else{
+      const color=info.type==='black'?'#111111':next(ch);
+      out+=flatJamoText(ch,x+49,71,info.type==='jamo'?83:73,color);
+      x+=100;
+    }
+  }
+  const w=Math.max(120,x+10);
+  return {approx:true,html:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} 140" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${esc(text)} 자모별 단색 테스트">${out}</svg>`};
+}
+function svgForText(font,text,view){
+  // 기본 글자 간격 유지: x에 수동 압축/추가 자간을 적용하지 않고 폰트 advanceWidth/kerning만 반영합니다.
+  const size=100,baseline=118, next=colorCursor();let x=8,content='',approx=false,prev=null;
+  const chars=Array.from(text);
+  for(let idx=0;idx<chars.length;idx++){
+    const ch=chars[idx],info=decompose(ch);
+    if(info.type==='unsupported')throw new Error('지원하지 않는 문자: '+ch);
+    const glyph=font.charToGlyph(ch);
+    if(prev&&font.getKerningValue)x+=font.getKerningValue(prev,glyph)*(size/font.unitsPerEm);
+    const advance=(glyph.advanceWidth||font.unitsPerEm*.55)*(size/font.unitsPerEm);
+    if(info.type!=='space'){
+      if(glyph.index===0)throw new Error(`폰트에 '${ch}' 글자가 없습니다.`);
+      const contours=getContours(glyph.getPath(x,baseline,size,{},font).commands);
+      const cs=componentsFromContours(contours);
+      let piece='';
+      if(info.type==='hangul'&&cs.length){
+        const compound=Boolean(COMPOUND[info.jung]);const final=Boolean(info.jong);
+        let groups;
+        if(info.cho==='ㅎ'&&compound)groups=assignHieutCompound(cs,final);
+        else if(info.cho==='ㅎ'&&'ㅗㅛㅜㅠㅡ'.includes(info.jung))groups=assignHieutHorizontal(cs,final);
+        else if(compound)groups=assignCompound(cs,final);
+        else groups=assignComponents(cs,info.jung,final);
+        if(groups[0]?.length&&groups[1]?.length&&(!final||groups[2]?.length)){
+          piece+=coloredPath(groups[0],next(info.cho));
+          if(compound){const two=splitVowel(groups[1]);const parts=COMPOUND[info.jung];
+            if(two[0].length&&two[1].length){piece+=coloredPath(two[0],next(parts[0]));piece+=coloredPath(two[1],next(parts[1]));}
+            else piece+=coloredPath(groups[1],next(info.jung));
+          }else piece+=coloredPath(groups[1],next(info.jung));
+          if(final)piece+=coloredPath(groups[2],next(info.jong));
+        }else{ return demoSvgForText(text,view); }
+      }else if(info.type==='black'){piece=coloredPath(cs,'#000000');}
+      else if(info.type==='latin'){piece=cs.map(c=>coloredPath([c],next(ch))).join('');}
+      else if(info.type==='jamo'){piece=coloredPath(cs,next(ch));}
+      content+=piece;
+    }
+    x+=advance;prev=glyph;
+  }
+  const width=Math.max(120,x+8);
+  return {approx,html:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width.toFixed(2)} 155" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${esc(text)} 러블리체 자모 컬러 미리보기">${content}</svg>`};
+}
+function lovelyMarkup(text,view){
+  if(state.font){try{return svgForText(state.font,text,view);}catch(e){console.warn('폰트 미리보기 오류:',e);}}
+  return demoSvgForText(text,view);
+}
+function draw(){const text=input.value||'김사또';
+  document.querySelectorAll('.font-preview:not(.lovely-view)').forEach(el=>el.textContent=text);
+  const mini=lovelyMarkup(text,'sm');lovelySmall.innerHTML=mini.html;
+  if(state.selected==='lovely'){
+    const large=lovelyMarkup(text,'lg');chosen.innerHTML=`<div class="lovely-view">${large.html}</div>`;
+    chosenLabel.textContent='내가 선택한 글씨체 · 무지개상품';
+  }else{
+    chosen.textContent=text;chosen.className='chosen-name '+state.selected;
+    chosenLabel.textContent='내가 선택한 글씨체 · '+cards.find(c=>c.dataset.font===state.selected).dataset.label;
+  }
+  if(state.selected==='lovely')chosen.className='chosen-name';
+}
+function schedule(){cancelAnimationFrame(state.raf);state.raf=requestAnimationFrame(draw);}
+function selectCard(card){state.selected=card.dataset.font;for(const c of cards){const active=c===card;c.setAttribute('aria-pressed',String(active));c.querySelector('.card-footer').textContent=active?'선택됨':'미리보기';}schedule();}
+for(const c of cards)c.addEventListener('click',()=>selectCard(c));
+input.addEventListener('input',schedule);
+document.getElementById('resetButton').addEventListener('click',()=>{input.value='조예주';selectCard(cards.find(c=>c.dataset.font==='lovely'));input.focus();});
+async function acceptFont(buffer,label){if(!window.opentype){throw new Error('폰트 분석 라이브러리를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.');}
+  const parsed=window.opentype.parse(buffer);
+  if(!parsed||!parsed.charToGlyph)throw new Error('폰트 파일을 읽을 수 없습니다.');
+  state.font=parsed;
+  // 직접 선택한 폰트는 일반 웹폰트 미리보기에도 적용합니다.
+  if(state.objectURL)URL.revokeObjectURL(state.objectURL);
+  state.objectURL=URL.createObjectURL(new Blob([buffer]));
+  try {const face=new FontFace('LovelyLoaded',`url(${state.objectURL})`);await face.load();document.fonts.add(face);document.documentElement.style.setProperty('--loadedLovely','LovelyLoaded');
+    // CSS에도 새로 읽은 파일을 적용.
+    let style=document.getElementById('loadedLovelyStyle');if(!style){style=document.createElement('style');style.id='loadedLovelyStyle';document.head.appendChild(style);}style.textContent='.lovely,.color-demo,.lovely-view svg text{font-family:"LovelyLoaded",sans-serif;}';
+  }catch(e){/* 윤곽 파서는 유지 */}
+  schedule();
+}
+async function loadHostedFont(){
+  const url='./fonts/Ownglyph_lovelyhyun-Rg.ttf';
+  try {const resp=await fetch(url,{cache:'no-store'});if(!resp.ok)throw new Error('파일 없음');await acceptFont(await resp.arrayBuffer(),'GitHub 연결 러블리체');}
+  catch(err){schedule();}
+}
+// 로컬 file:// 미리보기에서는 업로드 테스트, GitHub Pages에서는 자동 불러오기.
+if(location.protocol==='http:'||location.protocol==='https:'){
+  window.addEventListener('load',loadHostedFont,{once:true});
+}else{window.addEventListener('load',schedule,{once:true});}
+schedule();
+})();
+</script>
+</body>
+</html>
